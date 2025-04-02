@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fake History Browser</title>
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Control Panel -->
+  <div class="control-panel">
+    <h3>History Control Panel</h3>
+    <input type="text" id="cpTitle" placeholder="Title">
+    <input type="text" id="cpURL" placeholder="URL">
+    <input type="text" id="cpTime" placeholder="Time (e.g., 11:00 PM)">
+    <input type="text" id="cpDate" placeholder="Date (YYYY-MM-DD or 'Recent')">
+    <button onclick="addHistoryItem()">Add History</button>
+    <button onclick="clearAllHistory()">Clear All History</button>
+    <button onclick="clearControlPanel()">Clear Fields</button>
+    <button onclick="toggleFullScreen()">Full Screen Mode</button>
+    <p>
+      After clicking "Full Screen Mode," the browser UI will enter full screen.<br>
+      Then press your "Prt Scr" key (or use your screenshot tool) to capture the active window.<br>
+      Click "Close Instruction" on the overlay to dismiss it.
+    </p>
+  </div>
+
+  <!-- Fake Browser Window UI -->
+  <div class="edge-container" id="edgeUI">
+    <!-- Overlay Instruction -->
+    <div class="overlay" id="overlayInstruction">
+      <div>
+        <p>Full screen mode enabled.<br>
+           Now press your "Prt Scr" key or use your screenshot tool to capture the screen.<br>
+           When finished, click "Close Instruction".</p>
+        <button onclick="closeOverlay()">Close Instruction</button>
+      </div>
+    </div>
+    <!-- Top Bar -->
+    <div class="top-bar">
+      <div class="pinned-tabs">
+        <div class="pinned-tab"><i class="fa-solid fa-user"></i></div>
+        <div class="pinned-tab"><i class="fa-solid fa-layer-group"></i></div>
+        <div class="pinned-tab"><i class="fa-regular fa-window-restore"></i></div>
+      </div>
+      <div class="tab-bar">
+        <div class="tab">
+          <div class="tab-left">
+            <i class="fa-solid fa-download"></i>
+            <span class="tab-text">Downloads</span>
+          </div>
+          <span class="tab-close"><i class="fa-solid fa-xmark"></i></span>
+        </div>
+        <div class="tab active">
+          <div class="tab-left">
+            <i class="fa-solid fa-clock"></i>
+            <span class="tab-text">History</span>
+          </div>
+          <span class="tab-close"><i class="fa-solid fa-xmark"></i></span>
+        </div>
+        <div class="plus-tab">
+          <span class="plus-icon"><i class="fa-solid fa-plus"></i></span>
+        </div>
+      </div>
+      <div class="window-controls">
+        <i class="fa-solid fa-window-minimize"></i>
+        <i class="fa-solid fa-window-maximize"></i>
+        <i class="fa-solid fa-xmark"></i>
+      </div>
+    </div>
+    
+    <!-- Address Bar -->
+    <div class="address-bar-row">
+      <div class="address-icons">
+        <i class="fa-solid fa-arrow-left"></i>
+        <i class="fa-solid fa-arrow-rotate-right"></i>
+        <i class="fa-solid fa-house"></i>
+      </div>
+      <div class="address-bar">
+        <input type="text" value="edge://history/all" readonly>
+      </div>
+    </div>
+    
+    <!-- Main Content: Sidebar + History Area -->
+    <div class="edge-main-content">
+      <div class="edge-sidebar">
+        <div class="sidebar-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search history">
+        </div>
+        <div class="sidebar-nav">
+          <div class="nav-item">All</div>
+          <div class="nav-item">Recently closed</div>
+          <div class="nav-item">Tabs from other devices</div>
+        </div>
+      </div>
+      <div class="edge-history-area">
+        <div class="history-header">
+          <h2>History</h2>
+        </div>
+        <div class="history-list" id="historyGroups">
+          <!-- History items will be inserted here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Script -->
+  <script src="script.js"></script>
+</body>
+</html>
