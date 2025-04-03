@@ -1,3 +1,15 @@
+// History data array; each item includes a date (YYYY-MM-DD or "Recent")
+let historyItems = [
+  { title: "Swallowed Star Season 4 Episode 34", url: "https://animexin.dev/swallowed-star-season-4-episode-34-164-indonesia-english-sub/", time: "11:29 PM", date: "Recent" },
+  { title: "Tales of Herding Gods Episode 23", url: "https://animexin.dev/tales-of-herding-gods-episode-23-indonesia-english-sub/", time: "11:26 PM", date: "Recent" },
+  { title: "The Golden Wug Episode 24", url: "https://animexin.dev/the-golden-wug-episode-24-indonesia-english-sub/", time: "11:22 PM", date: "Recent" },
+  { title: "Everything Is Fine With The Emperor Episode 7", url: "https://animexin.dev/everything-is-fine-with-the-emperor-episode-7-indonesia-english/", time: "11:18 PM", date: "Recent" },
+  { title: "Inbox (0) - sadhunaskhatkus@gmail.com - Gmail", url: "https://mail.google.com", time: "10:55 PM", date: "2023-03-27" },
+  { title: "Copyscape Checker - Home Video", url: "https://copyscape.com", time: "10:50 PM", date: "2023-03-27" },
+  { title: "ChatGPT", url: "https://chat.openai.com", time: "10:45 PM", date: "2023-03-25" },
+  { title: "Plagiarism Checker - Free Tool", url: "https://copyscape.com/free", time: "10:40 PM", date: "2023-03-25" }
+];
+
 document.addEventListener("DOMContentLoaded", function () {
     loadHistory();
 });
@@ -25,8 +37,8 @@ function addHistoryItem() {
 
 function clearAllHistory() {
     if (confirm("Are you sure you want to clear all history?")) {
-        document.querySelector(".history-list").innerHTML = "";
-        localStorage.removeItem("fakeHistory");
+        historyItems = [];
+        generateFakeHistory();
     }
 }
 
@@ -70,24 +82,23 @@ function generateFakeHistory() {
     const groups = groupHistoryByDate();
     const historyGroupsDiv = document.getElementById("historyGroups");
     historyGroupsDiv.innerHTML = "";
+    
     for (const date in groups) {
         const header = document.createElement("div");
         header.className = "history-section-title";
         header.textContent = formatDateHeader(date);
-        header.style.margin = "10px 0 6px";
-        header.style.fontSize = "14px";
-        header.style.color = "#aaa";
         historyGroupsDiv.appendChild(header);
+        
         groups[date].forEach(item => {
             const row = document.createElement("div");
             row.className = "history-item";
             row.innerHTML = `
-              <div class="item-info">
-                <div class="title">${item.title}</div>
-                <div class="url">${item.url}</div>
-              </div>
-              <div class="timestamp">${item.time}</div>
-            `;
+            <div class="item-info">
+              <div class="title">${item.title}</div>
+              <div class="url">${item.url}</div>
+            </div>
+            <div class="timestamp">${item.time}</div>
+          `;
             historyGroupsDiv.appendChild(row);
         });
     }
@@ -120,6 +131,28 @@ function formatDateHeader(dateStr) {
         return d.toLocaleDateString(undefined, options);
     }
 }
+
+// Copyright protection
+function checkCopyright() {
+  if (!document.getElementById("copyrightFooter")) {
+    window.location.href = "https://geetatechhub.blogspot.com/";
+  }
+}
+
+const observer = new MutationObserver(function(mutationsList) {
+  for (const mutation of mutationsList) {
+    if (mutation.type === 'childList') {
+      checkCopyright();
+    }
+  }
+});
+
+observer.observe(document.body, { childList: true, subtree: true });
+
+document.addEventListener("DOMContentLoaded", function () {
+    loadHistory();
+    checkCopyright();
+});
 
 // Initialize fake history on load
 generateFakeHistory();
