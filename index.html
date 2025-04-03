@@ -2,17 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fake History Browser</title>
+  <title>Fake Edge History - Dark Theme</title>
   <!-- Font Awesome CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Custom Styles -->
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Control Panel -->
+  <!-- Control Panel (outside browser UI) -->
   <div class="control-panel">
-    <h3>History Control Panel</h3>
+    <strong>History Control Panel:</strong><br>
     <input type="text" id="cpTitle" placeholder="Title">
     <input type="text" id="cpURL" placeholder="URL">
     <input type="text" id="cpTime" placeholder="Time (e.g., 11:00 PM)">
@@ -22,19 +20,19 @@
     <button onclick="clearControlPanel()">Clear Fields</button>
     <button onclick="toggleFullScreen()">Full Screen Mode</button>
     <p>
-      After clicking "Full Screen Mode," the browser UI will enter full screen.<br>
-      Then press your "Prt Scr" key (or use your screenshot tool) to capture the active window.<br>
-      Click "Close Instruction" on the overlay to dismiss it.
+      After clicking "Full Screen Mode," your browser will enter full screen.<br>
+      Now press your "Prt Scr" key (or use your preferred screenshot tool) to capture the entire screen or active window.<br>
+      When finished, click "Close Instruction" to hide the overlay.
     </p>
   </div>
-
-  <!-- Fake Browser Window UI -->
+  
+  <!-- Fake Browser Window UI (captured in screenshot) -->
   <div class="edge-container" id="edgeUI">
     <!-- Overlay Instruction -->
     <div class="overlay" id="overlayInstruction">
       <div>
         <p>Full screen mode enabled.<br>
-           Now press your "Prt Scr" key or use your screenshot tool to capture the screen.<br>
+           Now press your "Prt Scr" key or use your system's screenshot tool to capture the screen.<br>
            When finished, click "Close Instruction".</p>
         <button onclick="closeOverlay()">Close Instruction</button>
       </div>
@@ -42,9 +40,16 @@
     <!-- Top Bar -->
     <div class="top-bar">
       <div class="pinned-tabs">
-        <div class="pinned-tab"><i class="fa-solid fa-user"></i></div>
-        <div class="pinned-tab"><i class="fa-solid fa-layer-group"></i></div>
-        <div class="pinned-tab"><i class="fa-regular fa-window-restore"></i></div>
+        <!-- Pinned Tabs: User, Tab Actions, Workspace -->
+        <div class="pinned-tab">
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <div class="pinned-tab">
+          <i class="fa-solid fa-layer-group"></i>
+        </div>
+        <div class="pinned-tab">
+          <i class="fa-regular fa-window-restore"></i>
+        </div>
       </div>
       <div class="tab-bar">
         <div class="tab">
@@ -66,13 +71,13 @@
         </div>
       </div>
       <div class="window-controls">
-        <i class="fa-solid fa-window-minimize"></i>
-        <i class="fa-solid fa-window-maximize"></i>
-        <i class="fa-solid fa-xmark"></i>
+        <i class="fa-solid fa-window-minimize minimize"></i>
+        <i class="fa-solid fa-window-maximize maximize"></i>
+        <i class="fa-solid fa-xmark close"></i>
       </div>
     </div>
     
-    <!-- Address Bar -->
+    <!-- Address Bar Row -->
     <div class="address-bar-row">
       <div class="address-icons">
         <i class="fa-solid fa-arrow-left"></i>
@@ -98,8 +103,13 @@
         </div>
       </div>
       <div class="edge-history-area">
-        <div class="history-header">
-          <h2>History</h2>
+        <div class="edge-history-header">
+          <h2>All</h2>
+          <div class="actions">
+            <button>Filter by date</button>
+            <button>Export browsing data</button>
+            <button>Delete browsing data</button>
+          </div>
         </div>
         <div class="history-list" id="historyGroups">
           <!-- History items will be inserted here -->
@@ -107,8 +117,10 @@
       </div>
     </div>
   </div>
-
-  <!-- Custom Script -->
+  
+  <!-- Hidden Screenshot Output -->
+  <div id="screenshotResult"></div>
+  
   <script src="script.js"></script>
 </body>
 </html>
