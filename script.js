@@ -54,7 +54,7 @@ function toggleFullScreen() {
         elem.requestFullscreen().then(() => {
             document.getElementById("overlayInstruction").style.display = "flex";
         }).catch(err => {
-            alert(`Error enabling full screen: ${err.message}`);
+            alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
         });
     } else {
         document.exitFullscreen();
@@ -65,3 +65,61 @@ function toggleFullScreen() {
 function closeOverlay() {
     document.getElementById("overlayInstruction").style.display = "none";
 }
+
+function generateFakeHistory() {
+    const groups = groupHistoryByDate();
+    const historyGroupsDiv = document.getElementById("historyGroups");
+    historyGroupsDiv.innerHTML = "";
+    for (const date in groups) {
+        const header = document.createElement("div");
+        header.className = "history-section-title";
+        header.textContent = formatDateHeader(date);
+        header.style.margin = "10px 0 6px";
+        header.style.fontSize = "14px";
+        header.style.color = "#aaa";
+        historyGroupsDiv.appendChild(header);
+        groups[date].forEach(item => {
+            const row = document.createElement("div");
+            row.className = "history-item";
+            row.innerHTML = `
+              <div class="item-info">
+                <div class="title">${item.title}</div>
+                <div class="url">${item.url}</div>
+              </div>
+              <div class="timestamp">${item.time}</div>
+            `;
+            historyGroupsDiv.appendChild(row);
+        });
+    }
+}
+
+function groupHistoryByDate() {
+    const groups = {};
+    historyItems.forEach(item => {
+        if (!groups[item.date]) {
+            groups[item.date] = [];
+        }
+        groups[item.date].push(item);
+    });
+    const sortedDates = Object.keys(groups).sort((a, b) => b.localeCompare(a));
+    const sortedGroups = {};
+    sortedDates.forEach(date => { sortedGroups[date] = groups[date]; });
+    return sortedGroups;
+}
+
+function formatDateHeader(dateStr) {
+    if (dateStr === "Recent") return "Recent";
+    const today = new Date().toISOString().slice(0,10);
+    if (dateStr === today) {
+        const d = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        return "Today – " + d.toLocaleDateString(undefined, options);
+    } else {
+        const d = new Date(dateStr);
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        return d.toLocaleDateString(undefined, options);
+    }
+}
+
+// Initialize fake history on load
+generateFakeHistory();
