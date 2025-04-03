@@ -236,26 +236,35 @@ body {
   text-align: left;
 }
 /* Custom Scrollbar with arrow buttons */
-.edge-history-area::-webkit-scrollbar { width: 8px; }
-.edge-history-area::-webkit-scrollbar-track { background: #1a1a1a; }
+.edge-history-area::-webkit-scrollbar {
+  width: 8px;
+}
+.edge-history-area::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
 .edge-history-area::-webkit-scrollbar-thumb {
-  background-color: #444; border-radius: 4px;
+  background-color: #444;
+  border-radius: 4px;
 }
 .edge-history-area::-webkit-scrollbar-button:vertical:start {
   background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12'><polygon points='6,2 10,8 2,8' fill='%23ccc'/></svg>") no-repeat center;
-  background-size: 10px 10px; height: 12px; margin-bottom: 2px;
+  background-size: 10px 10px;
+  height: 12px;
+  margin-bottom: 2px;
 }
 .edge-history-area::-webkit-scrollbar-button:vertical:end {
   background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12'><polygon points='2,4 10,4 6,10' fill='%23ccc'/></svg>") no-repeat center;
-  background-size: 10px 10px; height: 12px; margin-top: 2px;
+  background-size: 10px 10px;
+  height: 12px;
+  margin-top: 2px;
 }
-.history-header {
+.edge-history-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
 }
-.history-header h2 { font-size: 16px; color: #fff; margin: 0; }
+.edge-history-header h2 { font-size: 16px; color: #fff; margin: 0; }
 .actions button {
   background: #333;
   border: 1px solid #555;
@@ -285,19 +294,23 @@ body {
 .history-item .url { font-size: 12px; color: #bbb; }
 .history-item .timestamp { font-size: 12px; color: #888; white-space: nowrap; }
 
-/* Control Panel */
-.control-panel {
-  margin-top: 20px;
-  background: #1e1e1e;
-  padding: 10px;
-  border-radius: 5px;
-  width: 300px;
-  text-align: center;
+/* RESPONSIVE DESIGN FOR DESKTOPS (excluding mobile) */
+@media screen and (max-width: 1200px) {
+  .edge-container, .control-panel {
+    width: 90%;
+  }
+  .edge-history-area {
+    padding: 10px 15px;
+  }
 }
-.control-panel input, .control-panel button {
-  display: block;
-  margin: 10px auto;
-  padding: 8px;
-  width: 80%;
+@media screen and (max-width: 800px) {
+  .edge-container, .control-panel {
+    width: 95%;
+  }
+  .tab {
+    min-width: 140px;
+  }
+  .edge-sidebar {
+    width: 200px;
+  }
 }
-.control-panel button { background: #444; border: none; color: #fff; cursor: pointer; }
