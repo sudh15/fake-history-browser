@@ -7,7 +7,6 @@ body {
   padding: 20px;
   text-align: center;
 }
-
 /* Control Panel (outside browser UI) */
 .control-panel {
   max-width: 1000px;
@@ -41,7 +40,6 @@ body {
   font-size: 13px;
   color: #ccc;
 }
-
 /* Fake Browser UI Container */
 .edge-container {
   width: 1000px;
@@ -54,7 +52,6 @@ body {
   flex-direction: column;
   position: relative;
 }
-
 /* Overlay Instructions */
 .overlay {
   position: absolute;
@@ -80,7 +77,6 @@ body {
   border-radius: 4px;
   cursor: pointer;
 }
-
 /* Top Bar */
 .top-bar {
   background: #1e1e1e;
@@ -200,7 +196,7 @@ body {
 }
 .edge-sidebar {
   width: 240px;
-  background: #1e1e1e;
+  background: #1e1a1e;
   border-right: 1px solid #444;
   padding: 10px;
   text-align: left;
@@ -260,6 +256,22 @@ body {
   margin-bottom: 10px;
 }
 .history-header h2 { font-size: 16px; color: #fff; margin: 0; }
+.actions button {
+  background: #333;
+  border: 1px solid #555;
+  color: #ccc;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+.actions button:hover { background: #444; color: #fff; }
+.history-section-title {
+  font-size: 14px;
+  color: #aaa;
+  margin: 10px 0 6px 0;
+}
 .history-item {
   display: flex;
   justify-content: space-between;
@@ -288,9 +300,4 @@ body {
   padding: 8px;
   width: 80%;
 }
-.control-panel button {
-  background: #444;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-}
+.control-panel button { background: #444; border: none; color: #fff; cursor: pointer; }
